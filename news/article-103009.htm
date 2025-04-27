@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://paidvpn.github.io/news/article-103009.htm" />
+    <meta charset="utf-8">
+    <title>基于HiKariCP组件，分析连接池原理</title>
+        <meta name="description" content="池塘里养：Connection；   1、基础案例 HiKariCP作为SpringBoot2框架的默认连接池，号称是跑的最快的连接池，数据库连接池与之前两篇提到的线程池和对象池，从设计的原理上都是基" />
+        <link rel="icon" href="/assets/website/img/freenekobox/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="付费VPN推荐 机场订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://paidvpn.github.io/news/article-103009.htm" />
+    <meta property="og:site_name" content="付费VPN推荐 机场订阅官网" />
+    <meta property="og:title" content="基于HiKariCP组件，分析连接池原理" />
+    <meta property="og:image" content="https://paidvpn.github.io/uploads/20240726/cebeff9f8a992002c6854fe1fd092386.webp" />
+        <meta property="og:release_date" content="2025-04-24T09:16:51" />
+    <meta property="og:updated_time" content="2025-04-24T09:16:51" />
+        <meta property="og:description" content="池塘里养：Connection；   1、基础案例 HiKariCP作为SpringBoot2框架的默认连接池，号称是跑的最快的连接池，数据库连接池与之前两篇提到的线程池和对象池，从设计的原理上都是基" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="基于HiKariCP组件，分析连接池原理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="/assets/website/js/frontend/freenekobox/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="/assets/website/js/frontend/freenekobox/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="/assets/website/css/freenekobox/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJXW7ZZ0M9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BJXW7ZZ0M9');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body id="body" data-page="detail">
+        <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                                <a href="/" id="body" class="scrollto">付费VPN推荐</a>
+                                <!-- <a href="#body"><img src="/assets/website/img/freenekobox/logo.png" alt="" title="" /></a>-->
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                    </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+    Page Banner Section
+  ============================-->
+    <section id="innerBanner">
+        <div class="inner-content">
+            <h1><span>基于HiKariCP组件，分析连接池原理</span></h1>
+            <div class="nav-box">
+                <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / <span>正文</span>
+            </div>
+        </div>
+    </section><!-- #Page Banner -->
+    <main id="main">
+        <section id="about" class="wow fadeInUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<blockquote> <p>池塘里养：Connection；</p> </blockquote> </h1> <h2 id="1基础案例">1、基础案例</h2> <p>HiKariCP作为SpringBoot2框架的默认连接池，号称是跑的最快的连接池，数据库连接池与之前两篇提到的线程池和对象池，从设计的原理上都是基于池化思想，只是在实现方式上有各自的特点；首先还是看HiKariCP用法的基础案例：</p> <pre><code class="language-java">import com.zaxxer.hikari.HikariConfig; import com.zaxxer.hikari.HikariDataSource; import java.sql.Connection; import java.sql.ResultSet; import java.sql.Statement;  public class ConPool {     private static HikariConfig buildConfig (){         HikariConfig hikariConfig = new HikariConfig() ;         // 基础配置         hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/junit_test?characterEncoding=utf8");         hikariConfig.setUsername("root");         hikariConfig.setPassword("123456");         // 连接池配置         hikariConfig.setPoolName("dev-hikari-pool");         hikariConfig.setMinimumIdle(4);         hikariConfig.setMaximumPoolSize(8);         hikariConfig.setIdleTimeout(600000L);         return hikariConfig ;     }     public static void main(String[] args) throws Exception {         // 构建数据源         HikariDataSource dataSource = new HikariDataSource(buildConfig()) ;         // 获取连接         Connection connection = dataSource.getConnection() ;         // 声明SQL执行         Statement statement = connection.createStatement();         ResultSet resultSet = statement.executeQuery("SELECT count(1) num FROM jt_activity") ;         // 输出执行结果         if (resultSet.next()) {             System.out.println("query-count-result："+resultSet.getInt("num"));         }     } }</code></pre> <h2 id="2核心相关类">2、核心相关类</h2> <ul> <li><strong>HikariDataSource类</strong>：汇集数据源描述的相关信息，例如配置、连接池、连接对象、状态管理等；</li> <li><strong>HikariConfig类</strong>：维护数据源的配置管理，以及参数校验，例如userName、passWord、minIdle、maxPoolSize等；</li> <li><strong>HikariPool类</strong>：提供对连接池与池中对象管理的核心能力，并实现池相关监控数据的查询方法；</li> <li><strong>ConcurrentBag类</strong>：抛弃了常规池中采用的阻塞队列作为容器的方式，自定义该并发容器来存储连接对象；</li> <li><strong>PoolEntry类</strong>：拓展连接对象的信息，例如状态、时间等，方便容器中追踪这些实例化对象；</li> </ul> <p>通过对连接池中几个核心类的分析，也能直观地体会到该源码的设计原理，与上篇总结的对象池应用有异曲同工之妙，只是不同的组件不同的开发者在实现的时候，都具备各自的抽象逻辑。</p> <h2 id="3加载逻辑">3、加载逻辑</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/142a9b7468e31d0ed1c54790c3142deb.jpg" alt="基于HiKariCP组件，分析连接池原理"></p> <p>通过配置信息去构建数据源描述，在构造方法中基于配置再去实例化连接池，在HikariPool的构造中，实例化ConcurrentBag容器对象；下面再从源码层面分析实现细节。</p> </h1> <h2 id="1容器结构">1、容器结构</h2> <p>容器ConcurrentBag类提供PoolEntry类型的连接对象存储，以及基本的元素管理能力，对象的状态描述；虽然被HikariPool对象池类所持有，但是实际的操作逻辑是在该类中；</p> <p><strong>1.1 基础属性</strong></p> <p>其中最为核心的是<code>sharedList</code>共享集合、<code>threadList</code>线程级缓存、<code>handoffQueue</code>即时队列；</p> <pre><code class="language-java">// 共享对象集合，存放数据库连接 private final CopyOnWriteArrayList&lt;T&gt; sharedList; // 缓存线程级连接对象，会被优先使用，避免被争抢 private final ThreadLocal&lt;List&lt;Object&gt;&gt; threadList; // 等待获取连接的线程数 private final AtomicInteger waiters; // 标记是否关闭 private volatile boolean closed; // 即时处理连接的队列，当有等待线程时，通过该队列将连接分配给等待线程 private final SynchronousQueue&lt;T&gt; handoffQueue;</code></pre> <p><strong>1.2 状态描述</strong></p> <p>在ConcurrentBag类中的IConcurrentBagEntry内部接口，被PoolEntry类实现，该接口定义连接对象的状态：</p> <ul> <li>STATE_NOT_IN_USE：未使用，即闲置中；</li> <li>STATE_IN_USE：使用中；</li> <li>STATE_REMOVED：被废弃；</li> <li>STATE_RESERVED：保留态，中间状态，用于尝试驱逐连接对象时；</li> </ul> <h2 id="2包装对象">2、包装对象</h2> <p>容器的基本能力是用来存储连接对象的，而对象的管理则需要很多扩展的跟踪信息，以有效的完成各种场景下的识别，此时就需要借助包装类的引入；</p> <pre><code class="language-java">// 业务真正使用的连接对象 Connection connection; // 最近访问时间 long lastAccessed; // 最近借出时间 long lastBorrowed; // 状态描述 private volatile int state = 0; // 是否驱逐 private volatile boolean evict; // 生命周期结束时的调度任务 private volatile ScheduledFuture&lt;?&gt; endOfLife; // 连接生成的Statement对象 private final FastList&lt;Statement&gt; openStatements; // 池对象 private final HikariPool hikariPool;</code></pre> <p>这里需要注意FastList类实现List接口，为HiKariCP组件自定义，相比ArrayList类，出于对性能的追求，在元素的管理时，去掉诸多的范围校验。</p> </h1> <p>基于连接池的常规用法，来看看连接对象具体是如何管理，比如被借出，被释放，被废弃等，以及这些操作下对象的状态转换过程；</p> <h2 id="1初始化">1、初始化</h2> <p>上文<strong>加载逻辑</strong>的描述中，已经提到在构建数据源的时候，会根据配置实例化连接池，在初始化的时候，基于两个核心切入点来分析源码：1.实例化多少连接对象、2.连接对象转换包装对象；</p> <p>在连接池的构造中执行了<code>checkFailFast</code>方法，在该方法内执行MinIdle最小空闲数的判断，如果大于0，则创建一个包装对象并放入容器中；</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/871bbfce659941a000aa883d907b7db1.jpg" alt="基于HiKariCP组件，分析连接池原理"></p> <pre><code class="language-java">public HikariPool(final HikariConfig config) ; private void checkFailFast() {     final PoolEntry poolEntry = createPoolEntry();     if (config.getMinimumIdle() &gt; 0) {         connectionBag.add(poolEntry);     } }</code></pre> <p>需要注意两个问题，创建的连接包装对象，初始状态是0即闲置中；另外虽然案例中设置<code>MinIdle=4</code>的值，但是这里的判断大于0，也只在容器中预先放入一个空闲对象；</p> <h2 id="2借用对象">2、借用对象</h2> <p>从池中获取连接对象时，实际调用的是容器类中的<code>borrow</code>方法：</p> <pre><code class="language-java">public Connection HikariPool.getConnection(final long hardTimeout) throws SQLException ; public T ConcurrentBag.borrow(long timeout, final TimeUnit timeUnit) throws InterruptedException ;</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/8cc684aaf40c2dfe15e625d5928140ba.jpg" alt="基于HiKariCP组件，分析连接池原理"></p> <p>在执行<code>borrow</code>方法时，涉及如下几个核心步骤与逻辑：</p> <pre><code class="language-java">public T borrow(long timeout, final TimeUnit timeUnit) throws InterruptedException {     // 遍历本地线程缓存     final List&lt;Object&gt; list = threadList.get();     for (int i = list.size() - 1; i &gt;= 0; i--) {        final Object entry = list.remove(i);        final T bagEntry = weakThreadLocals ? ((WeakReference&lt;T&gt;) entry).get() : (T) entry;        if (bagEntry != null &amp;&amp; bagEntry.compareAndSet(STATE_NOT_IN_USE, STATE_IN_USE)) { }     }     // 增加等待线程数     final int waiting = waiters.incrementAndGet();     try {         // 遍历Shared共享集合         for (T bagEntry : sharedList) {            if (bagEntry.compareAndSet(STATE_NOT_IN_USE, STATE_IN_USE)) { }         }         // 一定时间内轮询handoff队列         listener.addBagItem(waiting);         timeout = timeUnit.toNanos(timeout);         do {            final T bagEntry = handoffQueue.poll(timeout, NANOSECONDS);         }      } finally {         // 减少等待线程数        waiters.decrementAndGet();     } }</code></pre> <ul> <li>首先反向遍历本地线程缓存，如果存在空闲连接，则返回该对象；如果没有则寻找共享集合；</li> <li>遍历Shared共享集合前，会标记等待线程数加1，如果存在空闲连接则直接返回；</li> <li>当Shared共享集合中也没有空闲连接时，这时当前线程进行一定时间的<code>handoffQueue</code>队列轮询，可能会有资源的释放，也可能是新添加的资源；</li> </ul> <p>注意这里在遍历集合时，取出的对象都会对状态进行判断和更新，如果得到空闲对象，会更新为<code>IN_USE</code>状态，然后返回；</p> <h2 id="3释放对象">3、释放对象</h2> <p>从池中释放连接对象时，实际调用的是容器类中的<code>requite</code>方法：</p> <pre><code class="language-java">void HikariPool.recycle(final PoolEntry poolEntry) ; public void ConcurrentBag.requite(final T bagEntry) ;</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/c7670a9c51fe51e5fc6eda017674abb9.jpg" alt="基于HiKariCP组件，分析连接池原理"></p> <p>在释放连接对象时，首先更新对象状态为空闲，然后判断当前是否有等待的线程，在<code>borrow</code>方法中等待线程会进入一定时间的轮询，如果没有的话则把对象放入本地线程缓存中：</p> <pre><code class="language-java">public void requite(final T bagEntry) {     // 更新状态     bagEntry.setState(STATE_NOT_IN_USE);     // 等待线程判断     for (int i = 0; waiters.get() &gt; 0; i++) {         if (bagEntry.getState() != STATE_NOT_IN_USE || handoffQueue.offer(bagEntry)) { }     }     // 本地线程缓存     final List&lt;Object&gt; threadLocalList = threadList.get();     if (threadLocalList.size() &lt; 50) {         threadLocalList.add(weakThreadLocals ? new WeakReference&lt;&gt;(bagEntry) : bagEntry);     } }</code></pre> <p>注意这里涉及到连接对象的状态从使用中转为<code>NOT_IN_USE</code>空闲；<code>borrow</code>与<code>requite</code>作为连接池中两个核心方法，负责资源创建与回收；</p> <p><strong>最后</strong>本篇文章并没有站在HiKariCP组件的整体设计上构思，只是分析连接池这冰山一角，尽管只是部分源码，但是已经足够彰显出作者对于性能的极致追求，比如：本地线程缓存、自定义容器类型、FastList等；能被普遍采用必然存在诸多支撑的理由。</p> </h1> <pre><code>应用仓库： https://gitee.com/cicadasmile/butte-flyer-parent  组件封装： https://gitee.com/cicadasmile/butte-frame-parent</code></pre> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-102059.htm">兽用疫苗查询网站（兽用疫苗真伪查询）</a></p>
+                                        <p>下一个：<a href="/news/article-103010.htm">动物医院诊室图片大全 动物医院诊室图片大全大图</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-104605.htm" title="Apache Hudi 如何加速传统的批处理模式">Apache Hudi 如何加速传统的批处理模式</a></li>
+                        <li class="py-2"><a href="/news/article-103010.htm" title="动物医院诊室图片大全 动物医院诊室图片大全大图">动物医院诊室图片大全 动物医院诊室图片大全大图</a></li>
+                        <li class="py-2"><a href="/news/article-100660.htm" title="使用Proftpd支持FTP/SFTP权限管控">使用Proftpd支持FTP/SFTP权限管控</a></li>
+                        <li class="py-2"><a href="/news/article-105270.htm" title="动物疫苗接种间隔多久打一次最好（动物疫苗接种间隔多久打一次最好呢）">动物疫苗接种间隔多久打一次最好（动物疫苗接种间隔多久打一次最好呢）</a></li>
+                        <li class="py-2"><a href="/news/article-103009.htm" title="基于HiKariCP组件，分析连接池原理">基于HiKariCP组件，分析连接池原理</a></li>
+                        <li class="py-2"><a href="/news/article-99916.htm" title="动物医院门头牌匾图片大全高清（动物医院诊室设计图）">动物医院门头牌匾图片大全高清（动物医院诊室设计图）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-23-node-share-links.htm" title="付费VPN推荐 | 4月23日20.7M/S|免费V2ray/SSR/Shadowrocket/Clash订阅分享">付费VPN推荐 | 4月23日20.7M/S|免费V2ray/SSR/Shadowrocket/Clash订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-26-free-high-speed-nodes.htm" title="付费VPN推荐 | 4月26日18.2M/S|免费Clash/SSR/V2ray/Shadowrocket订阅分享">付费VPN推荐 | 4月26日18.2M/S|免费Clash/SSR/V2ray/Shadowrocket订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-22-free-node-subscribe.htm" title="付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享">付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-99917.htm" title="宠物粮食厂家有些款不能网上销售 宠物粮食厂家有些款不能网上销售吗">宠物粮食厂家有些款不能网上销售 宠物粮食厂家有些款不能网上销售吗</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- #about -->
+        <footer id="footer">
+    <div class="container">
+        <div class="copyright">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            付费VPN推荐 机场订阅官网 版权所有
+            <br />
+            Powered by WordPress
+        </div>
+    </div>
+</footer><!-- #footer -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- JavaScript  -->
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery-migrate.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/easing/easing.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/hoverIntent.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/superfish.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/wow/wow.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/owlcarousel/owl.carousel.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/sticky/sticky.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/main.js"></script>
+<script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    </main>
+</body>
+
+</html>
