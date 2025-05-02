@@ -1,4 +1,4 @@
-# 付费VPN推荐 | 4月27日20.3M/S|免费Shadowrocket/Clash/SSR/V2ray订阅分享  更新时间 2025-04-27 08:38:42
+# 付费VPN推荐 | 5月2日19.4M/S|免费V2ray/Shadowrocket/SSR/Clash订阅分享  更新时间 2025-05-02 09:33:32
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://paidvpn.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://paidvpn.github.io/uploads/2025/04/0-20250427.yaml
-- https://paidvpn.github.io/uploads/2025/04/1-20250427.yaml
-- https://paidvpn.github.io/uploads/2025/04/2-20250427.yaml
-- https://paidvpn.github.io/uploads/2025/04/3-20250427.yaml
-- https://paidvpn.github.io/uploads/2025/04/4-20250427.yaml
+- https://paidvpn.github.io/uploads/2025/05/0-20250502.yaml
+- https://paidvpn.github.io/uploads/2025/05/1-20250502.yaml
+- https://paidvpn.github.io/uploads/2025/05/2-20250502.yaml
+- https://paidvpn.github.io/uploads/2025/05/3-20250502.yaml
+- https://paidvpn.github.io/uploads/2025/05/4-20250502.yaml
 
 ### V2ray订阅链接
 
-- https://paidvpn.github.io/uploads/2025/04/0-20250427.txt
-- https://paidvpn.github.io/uploads/2025/04/1-20250427.txt
-- https://paidvpn.github.io/uploads/2025/04/2-20250427.txt
-- https://paidvpn.github.io/uploads/2025/04/3-20250427.txt
-- https://paidvpn.github.io/uploads/2025/04/4-20250427.txt
+- https://paidvpn.github.io/uploads/2025/05/0-20250502.txt
+- https://paidvpn.github.io/uploads/2025/05/1-20250502.txt
+- https://paidvpn.github.io/uploads/2025/05/2-20250502.txt
+- https://paidvpn.github.io/uploads/2025/05/3-20250502.txt
+- https://paidvpn.github.io/uploads/2025/05/4-20250502.txt
 
 ### Sing-box订阅链接
 
-- https://paidvpn.github.io/uploads/2025/04/20250427.json
+- https://paidvpn.github.io/uploads/2025/05/20250502.json
 
 ## 更多clash节点订阅 ：
 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://paidvpn.github.io/news/article-108756.htm" />
+    <meta charset="utf-8">
+    <title>JS脚本按顺序依次加载执行</title>
+        <meta name="description" content="今天同事遇到一个需求，就是需要动态加载的脚本按顺序依次加载执行。尝试了使用document.write(DOMContentLoaded之后不能使用该方法，且该方法不推荐使用)，使用defer=“as" />
+        <link rel="icon" href="/assets/website/img/freenekobox/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="付费VPN推荐 机场订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://paidvpn.github.io/news/article-108756.htm" />
+    <meta property="og:site_name" content="付费VPN推荐 机场订阅官网" />
+    <meta property="og:title" content="JS脚本按顺序依次加载执行" />
+    <meta property="og:image" content="https://paidvpn.github.io/uploads/20240726/4fdf736183b2d1dcb89422396adb3730.webp" />
+        <meta property="og:release_date" content="2025-05-01T09:02:58" />
+    <meta property="og:updated_time" content="2025-05-01T09:02:58" />
+        <meta property="og:description" content="今天同事遇到一个需求，就是需要动态加载的脚本按顺序依次加载执行。尝试了使用document.write(DOMContentLoaded之后不能使用该方法，且该方法不推荐使用)，使用defer=“as" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JS脚本按顺序依次加载执行">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="/assets/website/js/frontend/freenekobox/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="/assets/website/js/frontend/freenekobox/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="/assets/website/css/freenekobox/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJXW7ZZ0M9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BJXW7ZZ0M9');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body id="body" data-page="detail">
+        <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                                <a href="/" id="body" class="scrollto">付费VPN推荐</a>
+                                <!-- <a href="#body"><img src="/assets/website/img/freenekobox/logo.png" alt="" title="" /></a>-->
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                    </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+    Page Banner Section
+  ============================-->
+    <section id="innerBanner">
+        <div class="inner-content">
+            <h1><span>JS脚本按顺序依次加载执行</span></h1>
+            <div class="nav-box">
+                <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / <span>正文</span>
+            </div>
+        </div>
+    </section><!-- #Page Banner -->
+    <main id="main">
+        <section id="about" class="wow fadeInUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>今天同事遇到一个需求，就是需要动态加载的脚本按顺序依次加载执行。尝试了使用document.write(DOMContentLoaded之后不能使用该方法，且该方法不推荐使用)，使用defer=“async”(部分浏览器比较古老，不支持该属性)。最后我写了一个方法，实现脚本的按顺序加载，代码如下：</p> <pre><code>function loadScript(){ 	var scriptArr =  Array.prototype.slice.apply(arguments); 	var script = document.createElement('script'); 	script.type = 'text/javascript';  	 	var rest = scriptArr.slice(1);  	if(rest.length &gt; 0){ 		script.onload = script.onreadystatechange = function() {  			if ( !this.readyState || this.readyState === "loaded" ||  			this.readyState === "complete" ) {  				loadScript.apply(null, rest);  				// Handle memory leak in IE  				script.onload = script.onreadystatechange = null;  			}  		}; 	 	}					  	script.src = scriptArr[0]; 	document.body.appendChild(script); }	 loadScript('1.js','2.js','3.js');</code></pre> <p>该方法兼容IE哟！！！</p> </div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-107927.htm">动物疫苗前景分析论文（动物疫苗行业分析）</a></p>
+                                        <p>下一个：<a href="/news/article-108757.htm">动物疫苗检测的方法有哪些（动物疫苗抗体检测）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-20-free-node-subscribe-links.htm" title="付费VPN推荐 | 4月20日22.3M/S|免费Shadowrocket/Clash/SSR/V2ray订阅分享">付费VPN推荐 | 4月20日22.3M/S|免费Shadowrocket/Clash/SSR/V2ray订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-103754.htm" title="一片枫叶还能说什么量词 一片枫叶还能说什么量词呢">一片枫叶还能说什么量词 一片枫叶还能说什么量词呢</a></li>
+                        <li class="py-2"><a href="/news/article-109586.htm" title="DataView 过滤、排序、DISTINCT功能">DataView 过滤、排序、DISTINCT功能</a></li>
+                        <li class="py-2"><a href="/news/article-99917.htm" title="宠物粮食厂家有些款不能网上销售 宠物粮食厂家有些款不能网上销售吗">宠物粮食厂家有些款不能网上销售 宠物粮食厂家有些款不能网上销售吗</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-27-free-subscribe-node.htm" title="付费VPN推荐 | 4月27日19.5M/S|免费Clash/V2ray/SSR/Shadowrocket订阅分享">付费VPN推荐 | 4月27日19.5M/S|免费Clash/V2ray/SSR/Shadowrocket订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-100660.htm" title="使用Proftpd支持FTP/SFTP权限管控">使用Proftpd支持FTP/SFTP权限管控</a></li>
+                        <li class="py-2"><a href="/news/article-107926.htm" title="1970年6月2日农历是多少（1970年公历6月2日时辰吉凶查询）">1970年6月2日农历是多少（1970年公历6月2日时辰吉凶查询）</a></li>
+                        <li class="py-2"><a href="/news/article-102059.htm" title="兽用疫苗查询网站（兽用疫苗真伪查询）">兽用疫苗查询网站（兽用疫苗真伪查询）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-22-free-node-subscribe.htm" title="付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享">付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-106098.htm" title="动物医院门头设计图片（动物医院门头设计图片大全）">动物医院门头设计图片（动物医院门头设计图片大全）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">35</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- #about -->
+        <footer id="footer">
+    <div class="container">
+        <div class="copyright">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            付费VPN推荐 机场订阅官网 版权所有
+            <br />
+            Powered by WordPress
+        </div>
+    </div>
+</footer><!-- #footer -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- JavaScript  -->
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery-migrate.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/easing/easing.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/hoverIntent.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/superfish.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/wow/wow.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/owlcarousel/owl.carousel.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/sticky/sticky.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/main.js"></script>
+<script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    </main>
+</body>
+
+</html>

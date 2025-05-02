@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://paidvpn.github.io/news/article-109586.htm" />
+    <meta charset="utf-8">
+    <title>DataView 过滤、排序、DISTINCT功能</title>
+        <meta name="description" content="DataView不知道还有这么好用的功能，真是一种享受。 多说无益，还是让我们一起去享受下这种快感吧 这里首先新建了一个数据集testDataSet，新建一testDataTableDataTable" />
+        <link rel="icon" href="/assets/website/img/freenekobox/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="付费VPN推荐 机场订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://paidvpn.github.io/news/article-109586.htm" />
+    <meta property="og:site_name" content="付费VPN推荐 机场订阅官网" />
+    <meta property="og:title" content="DataView 过滤、排序、DISTINCT功能" />
+    <meta property="og:image" content="https://paidvpn.github.io/uploads/20240726/1ebe1b3fd77d9e12555d68ac205690da.webp" />
+        <meta property="og:release_date" content="2025-05-02T09:22:46" />
+    <meta property="og:updated_time" content="2025-05-02T09:22:46" />
+        <meta property="og:description" content="DataView不知道还有这么好用的功能，真是一种享受。 多说无益，还是让我们一起去享受下这种快感吧 这里首先新建了一个数据集testDataSet，新建一testDataTableDataTable" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="DataView 过滤、排序、DISTINCT功能">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="/assets/website/js/frontend/freenekobox/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="/assets/website/js/frontend/freenekobox/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freenekobox/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="/assets/website/css/freenekobox/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJXW7ZZ0M9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BJXW7ZZ0M9');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body id="body" data-page="detail">
+        <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                                <a href="/" id="body" class="scrollto">付费VPN推荐</a>
+                                <!-- <a href="#body"><img src="/assets/website/img/freenekobox/logo.png" alt="" title="" /></a>-->
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                    </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+    Page Banner Section
+  ============================-->
+    <section id="innerBanner">
+        <div class="inner-content">
+            <h1><span>DataView 过滤、排序、DISTINCT功能</span></h1>
+            <div class="nav-box">
+                <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / <span>正文</span>
+            </div>
+        </div>
+    </section><!-- #Page Banner -->
+    <main id="main">
+        <section id="about" class="wow fadeInUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="htmledit_views"> <p>DataView不知道还有这么好用的功能，真是一种享受。</p> <p>多说无益，还是让我们一起去享受下这种快感吧</p> <p>这里首先新建了一个数据集testDataSet，新建一testDataTableDataTable</p> <p>添加了4列字段</p> <p>字段名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 类型</p> <p>stringVar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.String</p> <p>intVar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.Int32</p> <p>boolVar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.Boolean</p> <p>datetimeVar&nbsp;&nbsp;&nbsp;&nbsp; System.DateTime</p> <p>首先声明下，我这里是在WinForm环境下测试的</p> <p>好，进入关键代码区</p> <p>view plaincopy to clipboardprint?<br />private void AddOneRow(testDataSet.testDataTableDataTable dt, string strVar, int intVar,bool boolVar,DateTime datetimeVar)&nbsp;&nbsp; <br />{&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; // 插入一条新数据记录&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; dt.AddtestDataTableRow(strVar, intVar, boolVar, datetimeVar);&nbsp;&nbsp; <br />}&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; // 关键代码&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; testDataSet ds = new testDataSet();&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; // 先填充些许数据以便后续测试（没有数据怎么能测呢，呵呵~）&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100001", 1, true, DateTime.Now);&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100002", 2, true, Convert.ToDateTime("2010-4-25 13:00:36"));&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100003", 3, false, Convert.ToDateTime("2008-10-25 12:59:36"));&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100001", 1, true, DateTime.Now);&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100002", 2, true, Convert.ToDateTime("2010-4-25 13:00:36"));&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100003", 3, false, Convert.ToDateTime("2008-10-25 12:59:36"));&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; /* 这句的作用是相当巨大的，可别小瞧了这句Copy，它把表结构及数据拷贝到另一个内存区域，&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 在这里不能用Clone，因为Clone只是把数据结构“克隆”，不包含数据。 */&nbsp; <br />&nbsp;&nbsp;&nbsp; DataTable dt = ds.testDataTable.Copy();&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; /* 这里若把ds.testDataTable.DefaultView直接赋给dv，则意味着下面的dt1与&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * ds.testDataTable紧紧的捆绑在了一起，它们共享同一块内存区域，调试的&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 时候可发现dt1与ds.testDataTable的数据已经不一样，但运行后dataGridView1&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 和dataGridView2的显示的数据却是完全一样的。所以我们得事先把ds.testDataTable&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 挪到另一内存区域，这还是前面Copy那句的功能（作用巨大吧~）。这样我们就帮dt1和&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * ds.testDataTable给“松绑”了哈~&nbsp;&nbsp; */&nbsp; <br />&nbsp;&nbsp;&nbsp; DataView dv = dt.DefaultView;&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; // 其实本文要说的核心是以下这三句&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; // RowFilter，顾名思义就是一个过滤器，相当于SQL的条件查询，可以多条件过滤，中间用and/or等连接&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; dv.RowFilter = "stringVar = '20100002'";&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; /* Sort即排序，默认按升序排序（不过我还是习惯手动加上ASC，以便区分），若要降序，则在字段名后面&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 加DESC关键字（如"stringVar DESC"）即可 */&nbsp; <br />&nbsp;&nbsp;&nbsp; dv.Sort = "stringVar ASC";&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; /* ToTable()有4个重载方法，个人认为只有distinct(bool型)和columnNames(params string[]型)这两个&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 参数比较有实用价值，distinct参数置为true时就相当于我们SQL的DISTINCT关键字一样的作用，而&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * columnNames参数就给我们提供了具体抽取哪个字段。下面这句其实就相当于&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * "SELECT DISTINCT stringVar,intVar from table" */&nbsp; <br />&nbsp;&nbsp;&nbsp; DataTable dt1 = dv.ToTable(true, "stringVar", "intVar");&nbsp;&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; this.dataGridView1.DataSource = ds.testDataTable;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; this.dataGridView2.DataSource = dt1;&nbsp;&nbsp; <br />&nbsp; <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; /* 下面这两句也相当重要，若没有这两句，则我们在dataGridView标题栏所设置的颜色就无法显示了&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; * 当然也可以在属性框里直接设置 */&nbsp; <br />&nbsp;&nbsp;&nbsp; this.dataGridView1.EnableHeadersVisualStyles = false;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; this.dataGridView2.EnableHeadersVisualStyles = false;&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private void AddOneRow(testDataSet.testDataTableDataTable dt, string strVar, int intVar,bool boolVar,DateTime datetimeVar)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<!-- --><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 插入一条新数据记录<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dt.AddtestDataTableRow(strVar, intVar, boolVar, datetimeVar);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 关键代码</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; testDataSet ds = new testDataSet();</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 先填充些许数据以便后续测试（没有数据怎么能测呢，呵呵~）<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100001", 1, true, DateTime.Now);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100002", 2, true, Convert.ToDateTime("2010-4-25 13:00:36"));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100003", 3, false, Convert.ToDateTime("2008-10-25 12:59:36"));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100001", 1, true, DateTime.Now);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100002", 2, true, Convert.ToDateTime("2010-4-25 13:00:36"));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AddOneRow(ds.testDataTable, "20100003", 3, false, Convert.ToDateTime("2008-10-25 12:59:36"));</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 这句的作用是相当巨大的，可别小瞧了这句Copy，它把表结构及数据拷贝到另一个内存区域，<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 在这里不能用Clone，因为Clone只是把数据结构“克隆”，不包含数据。 */<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DataTable dt = ds.testDataTable.Copy();</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 这里若把ds.testDataTable.DefaultView直接赋给dv，则意味着下面的dt1与<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ds.testDataTable紧紧的捆绑在了一起，它们共享同一块内存区域，调试的<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 时候可发现dt1与ds.testDataTable的数据已经不一样，但运行后dataGridView1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 和dataGridView2的显示的数据却是完全一样的。所以我们得事先把ds.testDataTable<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 挪到另一内存区域，这还是前面Copy那句的功能（作用巨大吧~）。这样我们就帮dt1和<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ds.testDataTable给“松绑”了哈~&nbsp;&nbsp; */<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DataView dv = dt.DefaultView;</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 其实本文要说的核心是以下这三句</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // RowFilter，顾名思义就是一个过滤器，相当于SQL的条件查询，可以多条件过滤，中间用and/or等连接<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dv.RowFilter = "stringVar = '20100002'";</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Sort即排序，默认按升序排序（不过我还是习惯手动加上ASC，以便区分），若要降序，则在字段名后面<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 加DESC关键字（如"stringVar DESC"）即可 */<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dv.Sort = "stringVar ASC";</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* ToTable()有4个重载方法，个人认为只有distinct(bool型)和columnNames(params string[]型)这两个<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 参数比较有实用价值，distinct参数置为true时就相当于我们SQL的DISTINCT关键字一样的作用，而<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * columnNames参数就给我们提供了具体抽取哪个字段。下面这句其实就相当于<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * "SELECT DISTINCT stringVar,intVar from table" */<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DataTable dt1 = dv.ToTable(true, "stringVar", "intVar");</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.dataGridView1.DataSource = ds.testDataTable;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.dataGridView2.DataSource = dt1;</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 下面这两句也相当重要，若没有这两句，则我们在dataGridView标题栏所设置的颜色就无法显示了<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 当然也可以在属性框里直接设置 */<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.dataGridView1.EnableHeadersVisualStyles = false;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.dataGridView2.EnableHeadersVisualStyles = false;</p> <p>本就想整理一下DataView这三个功能，没想获得额外的收获，</p> <p>意味的惊喜，呵呵~</p> <p>学习的过程本该就是这么充满乐趣的~ </p> <p>&nbsp;</p> <p>本文来自CSDN博客，转载请标明出处：http://blog.csdn.net/luols/archive/2010/04/28/5539573.aspx</p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-109583.htm">mybatis 加载配置文件的方法（两种方式）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-103753.htm" title="宠物领养市场分析（宠物领养市场分析论文）">宠物领养市场分析（宠物领养市场分析论文）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-29-free-subscribe-node.htm" title="付费VPN推荐 | 4月29日20M/S|免费Clash/SSR/V2ray/Shadowrocket订阅分享">付费VPN推荐 | 4月29日20M/S|免费Clash/SSR/V2ray/Shadowrocket订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-106097.htm" title="PHP比较对象">PHP比较对象</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-22-free-node-subscribe.htm" title="付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享">付费VPN推荐 | 4月22日20.9M/S|免费Shadowrocket/V2ray/SSR/Clash订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-105270.htm" title="动物疫苗接种间隔多久打一次最好（动物疫苗接种间隔多久打一次最好呢）">动物疫苗接种间隔多久打一次最好（动物疫苗接种间隔多久打一次最好呢）</a></li>
+                        <li class="py-2"><a href="/news/article-107157.htm" title="谷饶有什么好玩加好吃的地方吗(谷饶有什么好玩加好吃的地方推荐)">谷饶有什么好玩加好吃的地方吗(谷饶有什么好玩加好吃的地方推荐)</a></li>
+                        <li class="py-2"><a href="/news/article-103010.htm" title="动物医院诊室图片大全 动物医院诊室图片大全大图">动物医院诊室图片大全 动物医院诊室图片大全大图</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-24-free-v2ray-subscribe.htm" title="付费VPN推荐 | 4月24日21.4M/S|免费Shadowrocket/Clash/V2ray/SSR订阅分享">付费VPN推荐 | 4月24日21.4M/S|免费Shadowrocket/Clash/V2ray/SSR订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-108756.htm" title="JS脚本按顺序依次加载执行">JS脚本按顺序依次加载执行</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-2-free-node-subscribe-links.htm" title="付费VPN推荐 | 5月2日20.1M/S|免费V2ray/SSR/Shadowrocket/Clash订阅分享">付费VPN推荐 | 5月2日20.1M/S|免费V2ray/SSR/Shadowrocket/Clash订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">35</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- #about -->
+        <footer id="footer">
+    <div class="container">
+        <div class="copyright">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            付费VPN推荐 机场订阅官网 版权所有
+            <br />
+            Powered by WordPress
+        </div>
+    </div>
+</footer><!-- #footer -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- JavaScript  -->
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/jquery/jquery-migrate.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/easing/easing.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/hoverIntent.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/superfish/superfish.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/wow/wow.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/owlcarousel/owl.carousel.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/magnific-popup/magnific-popup.min.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/sticky/sticky.js"></script>
+<script src="/assets/website/js/frontend/freenekobox/main.js"></script>
+<script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    </main>
+</body>
+
+</html>
